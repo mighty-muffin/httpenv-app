@@ -15,3 +15,86 @@ dependencies = [
 dev = [
   "pytest>=8.3.5",
 ]
+
+[tool.mypy]
+files = [
+    "app",
+    "tests"
+]
+
+[tool.pytest.ini_options]
+addopts = "-vvv"
+testpaths = "tests"
+
+[tool.ruff]
+extend-exclude = [
+  "__pycache__",
+  "build",
+  "dist",
+]
+
+target-version = "py313"
+line-length = 90
+src = [
+    "app",
+]
+
+[tool.ruff.format]
+quote-style = "single"
+docstring-code-format = true
+
+[tool.ruff.lint]
+extend-select = [
+  "C4",
+  "D200",
+  "D201",
+  "D204",
+  "D205",
+  "D206",
+  "D210",
+  "D211",
+  "D213",
+  "D300",
+  "D400",
+  "D402",
+  "D403",
+  "D404",
+  "D419",
+  "E",
+  "F",
+  "FURB",
+  "G010",
+  "I",
+  "INP001",
+  "N805",
+  "PERF101",
+  "PERF102",
+  "PERF401",
+  "PERF402",
+  "PGH004",
+  "PGH005",
+  "PIE794",
+  "PIE796",
+  "PIE807",
+  "PIE810",
+  "PLR",
+  "RET502",
+  "RET503",
+  "RET504",
+  "RET505",
+  "RUF015",
+  "RUF032",
+  "RUF033",
+  "RUF034",
+  "RUF100",
+  "S101",
+  "T20",
+  "T201",
+  "UP",
+  "W",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = [
+    "S101"
+]
