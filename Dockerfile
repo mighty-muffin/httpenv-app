@@ -19,6 +19,8 @@ RUN uv sync
 
 FROM python:3.13-slim-bookworm AS production
 
+ENV SECRET="GFmFGDW3aFYOKYGdJWRy2EPw9IgIaLs2HwOXm1F0Q714ga6mM6cfONjjG27DCNw4"
+
 RUN useradd --create-home appuser
 USER appuser
 
