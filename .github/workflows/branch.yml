@@ -1,0 +1,43 @@
+---
+name: CI - Branches
+
+on: # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - dev
+      - feat/*
+      - fix/*
+      - rel/*
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+
+  unit-test:
+    name: Run Unit Tests & Integration Tests
+    uses: mighty-muffin/.github/.github/workflows/reusable-python-uv.yml@main
+
+    with:
+      python_version: "3.13"
+      ruff_version: "0.12.10"
+      uv_version: "0.8.13"
+      working_directory: .
+
+  docker-build-push:
+    needs:
+      - unit-test
+    name: Call Docker Build
+    uses: mighty-muffin/.github/.github/workflows/reusable-docker-build.yml@main
+
+    permissions:
+      contents: read
+      packages: write
+      pull-requests: write
+
+    with:
+      push: false

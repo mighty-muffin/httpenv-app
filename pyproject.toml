@@ -1,0 +1,17 @@
+[project]
+name = "httpenv-app"
+version = "0.1.0"
+description = "Tiny HTTP server showing the environment variablesn"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastapi>=0.95.0",
+    "httpx>=0.28.1",
+    "uvicorn>=0.21.1",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3.5",
+]
