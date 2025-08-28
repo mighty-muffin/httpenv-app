@@ -13,6 +13,7 @@ A tiny HTTP server built with FastAPI, demonstrating usage of environment variab
 
 - [Python 3.13+](https://docs.python.org/3/whatsnew/3.13.html)
 - [UV package manager](https://github.com/astral-sh/uv)
+- [Docker buildx](https://docs.docker.com/reference/cli/docker/buildx/)
 
 ## Getting Started
 
@@ -41,6 +42,15 @@ Start the FastAPI server using Uvicorn:
 
 ```sh
 uv run uvicorn app.main:app --port 8080 # Go to http://localhost:8080
+```
+
+## Build a container
+
+To build this container run these commands:
+
+```sh
+docker buildx build -f Dockerfile . -t httpenv-app
+docker run -d httpenv-app:latest
 ```
 
 ## Environment Variables
