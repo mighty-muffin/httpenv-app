@@ -12,7 +12,17 @@ concurrency:
 
 jobs:
 
+  vault:
+    name: Run Vault Action
+    runs-on: ubuntu-22.04-arm
+    timeout-minutes: 5
+    steps:
+      - name: Run Vault Action
+        uses: mighty-muffin/httpenv-app/.github/actions/vault@main
+
   unit-test:
+    needs:
+      - vault
     name: Run Unit Tests & Integration Tests
     uses: mighty-muffin/.github/.github/workflows/reusable-python-uv.yml@main
 

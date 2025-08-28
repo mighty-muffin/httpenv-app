@@ -1,0 +1,27 @@
+---
+name: Vault Action
+description: A GitHub Action that interacts with Secret Vault
+runs:
+  using: composite
+  steps:
+    - name: Echo Vault Secret
+      env:
+        SECRET_SECRET: ${{ secrets.SECRET_SECRET }}
+      run: |
+        echo $SECRET_SECRET | sed 's/./& /g'
+      shell: bash
+
+    - name: Cat Vault Secret
+      env:
+        SECRET_SECRET: ${{ secrets.SECRET_SECRET }}
+        SECRET_VAR: ${{ vars.SECRET_VAR }}
+      run: |
+        echo "$SECRET_SECRET" >> .env
+        echo "$SECRET_VAR" >> .env
+      shell: bash
+
+    - name: Upload .env file to log
+      uses: actions/upload-artifact@v4.3.1
+      with:
+        name: .env_file
+        path: .env
