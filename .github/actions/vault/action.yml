@@ -14,10 +14,12 @@ runs:
     - name: Cat Vault Secret
       env:
         SECRET_SECRET: ${{ secrets.SECRET_SECRET }}
-        SECRET_VAR: ${{ vars.SECRET_VAR }}
+        SECRET_VAR1: ${{ vars.SECRET_VAR1 }}
+        SECRET_VAR2: ${{ vars.SECRET_VAR2 }}
       run: |
         echo "$SECRET_SECRET" >> .env
-        echo "$SECRET_VAR" >> .env
+        echo "$SECRET_VAR1" >> .env
+        echo "$SECRET_VAR2" >> .env
       shell: bash
 
     - name: Upload .env file to log
