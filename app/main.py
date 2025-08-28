@@ -7,10 +7,24 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET = os.getenv("SECRET", "123456")
+FEATURE_FORMAL = os.getenv("FEATURE_FORMAL", False)
 FEATURE_GOODBYE = os.getenv("FEATURE_GOODBYE", False)
 
 app = FastAPI()
 
+if FEATURE_FORMAL:
+
+    @app.get("/")
+    def hello_formal(name: str = "World", formal: bool = False):
+        if formal:
+            return f"Good day to you, {name}."
+        return f"Hello, {name}!"
+
+else:
+
+    @app.get("/")
+    def hello(name: str = "World"):
+        return f"Hello, {name}!"
 
 @app.get("/")
 def hello(name: str = "World"):
