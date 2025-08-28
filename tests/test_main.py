@@ -19,15 +19,22 @@ def test_hello_name():
     assert data == "Hello, Test!"
 
 
-def test_bye():
-    response = client.get("/bye")
+def test_hello_formal():
+    response = client.get("/?formal=True")
+    assert response.status_code == 200, response.text
+    data = response.json()
+    assert data == "Good day to you, World."
+
+
+def test_goodbye():
+    response = client.get("/goodbye")
     assert response.status_code == 200, response.text
     data = response.json()
     assert data == "Goodbye, World!"
 
 
-def test_bye_name():
-    response = client.get("/bye?name=Test")
+def test_goodbye_name():
+    response = client.get("/goodbye?name=Test")
     assert response.status_code == 200, response.text
     data = response.json()
     assert data == "Goodbye, Test!"

@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET = os.getenv("SECRET", "123456")
-FEATURE_FORMAL = os.getenv("FEATURE_FORMAL", False)
-FEATURE_GOODBYE = os.getenv("FEATURE_GOODBYE", False)
+FEATURE_FORMAL = os.getenv("FEATURE_FORMAL", True)
+FEATURE_GOODBYE = os.getenv("FEATURE_GOODBYE", True)
 
 app = FastAPI()
 
@@ -25,10 +25,6 @@ else:
     @app.get("/")
     def hello(name: str = "World"):
         return f"Hello, {name}!"
-
-@app.get("/")
-def hello(name: str = "World"):
-    return f"Hello, {name}!"
 
 
 if FEATURE_GOODBYE:
