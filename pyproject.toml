@@ -27,6 +27,7 @@ addopts = "-vvv"
 testpaths = "tests"
 
 [tool.ruff]
+output-format = "github"
 extend-exclude = [
   "__pycache__",
   "build",
@@ -37,6 +38,7 @@ target-version = "py313"
 line-length = 90
 src = [
     "app",
+    "tests"
 ]
 
 [tool.ruff.format]
