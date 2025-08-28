@@ -1,0 +1,10 @@
+---
+name: Hello World Action
+description: A GitHub Action that says Hello World
+runs:
+  using: composite
+  steps:
+    - name: Echo Hello World
+      run: |
+        echo "Hello, World!"
+      shell: bash

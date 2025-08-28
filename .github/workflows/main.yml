@@ -15,7 +15,17 @@ concurrency:
 
 jobs:
 
+  hello-world:
+    name: Run Hello World
+    runs-on: ubuntu-22.04-arm
+    timeout-minutes: 5
+    steps:
+      - name: Run Hello World Action
+        uses: mighty-muffin/httpenv-app/.github/actions/hello/action.yml@main
+
   unit-test:
+    needs:
+      - hello-world
     name: Run Unit Tests & Integration Tests
     uses: mighty-muffin/.github/.github/workflows/reusable-python-uv.yml@main
 
