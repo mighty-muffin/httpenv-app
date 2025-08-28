@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 SECRET = os.getenv("SECRET", "123456")
+FEATURE_GOODBYE = os.getenv("FEATURE_GOODBYE", False)
 
 app = FastAPI()
 
@@ -16,9 +17,11 @@ def hello(name: str = "World"):
     return f"Hello, {name}!"
 
 
-@app.get("/bye")
-def bye(name: str = "World"):
-    return f"Goodbye, {name}!"
+if FEATURE_GOODBYE:
+
+    @app.get("/goodbye")
+    def goodbye(name: str = "World"):
+        return f"Goodbye, {name}!"
 
 
 @app.get("/policeducode")
