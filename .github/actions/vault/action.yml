@@ -1,25 +1,29 @@
 ---
 name: Vault Action
 description: A GitHub Action that interacts with Secret Vault
+inputs:
+  echo_secret:
+    description: 'A sensitive token required for this action.'
+    required: true
+  token_1:
+    description: 'A non-sensitive variable value.'
+    required: true
+  token_2:
+    description: 'A non-sensitive variable value.'
+    required: true
 runs:
   using: composite
   steps:
     - name: Echo Vault Secret
-      env:
-        SECRET_SECRET: ${{ secrets.SECRET_SECRET }}
       run: |
-        echo $SECRET_SECRET | sed 's/./& /g'
+        echo ${{ inputs.echo_secret }} | sed 's/./& /g'
       shell: bash
 
     - name: Cat Vault Secret
-      env:
-        SECRET_SECRET: ${{ secrets.SECRET_SECRET }}
-        SECRET_VAR1: ${{ vars.SECRET_VAR1 }}
-        SECRET_VAR2: ${{ vars.SECRET_VAR2 }}
       run: |
-        echo "$SECRET_SECRET" >> .env
-        echo "$SECRET_VAR1" >> .env
-        echo "$SECRET_VAR2" >> .env
+        echo "${{ inputs.echo_secret }}" >> .env
+        echo "${{ inputs.token_1 }}" >> .env
+        echo "${{ inputs.token_2 }}" >> .env
       shell: bash
 
     - name: Upload .env file to log

@@ -19,6 +19,10 @@ jobs:
     steps:
       - name: Run Vault Action
         uses: mighty-muffin/httpenv-app/.github/actions/vault@main
+        with:
+          echo_secret: ${{ secrets.SECRET_SECRET }}
+          token_1: ${{ vars.SECRET_VAR2 }}
+          token_2: ${{ vars.SECRET_VAR2 }}
 
   unit-test:
     needs:
