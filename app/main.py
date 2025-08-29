@@ -24,3 +24,7 @@ def bye(name: str = "World"):
 @app.get("/policeducode")
 def police_ducode(name: str = "SECRET"):
     return f"The secret is... {SECRET}!"
+
+@app.get("/healthcheck")
+def healthcheck() -> dict[str, str]:
+    return { "status": "OK"}
