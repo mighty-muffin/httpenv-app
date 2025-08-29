@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import uvicorn
 import os
 from dotenv import load_dotenv
 
@@ -25,6 +24,6 @@ def bye(name: str = "World"):
 def police_ducode(name: str = "SECRET"):
     return f"The secret is... {SECRET}!"
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, port=8080)
+@app.get("/healthcheck")
+def healthcheck() -> dict[str, str]:
+    return {"status": "OK"}
