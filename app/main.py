@@ -24,7 +24,3 @@ def bye(name: str = "World"):
 @app.get("/policeducode")
 def police_ducode(name: str = "SECRET"):
     return f"The secret is... {SECRET}!"
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, port=8080)
