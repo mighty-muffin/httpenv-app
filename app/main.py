@@ -53,8 +53,9 @@ def fetch_external_api():
                 continue
             response.raise_for_status()
             return response.json()
-        except requests.RequestException:
+        except (requests.ConnectionError, requests.Timeout) as exc:
             if attempt == max_retries - 1:
-                raise HTTPException(status_code=500, detail="External API request failed.")
+                raise HTTPException(status_code=500, detail="External API request failed.") from exc
             time.sleep(backoff)
             backoff *= 2
+            continue
