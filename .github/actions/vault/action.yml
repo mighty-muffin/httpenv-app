@@ -27,7 +27,7 @@ runs:
       shell: bash
 
     - name: Upload .env file to log
-      uses: actions/upload-artifact@v4.3.1
+      uses: actions/upload-artifact@v4.6.2
       with:
         name: .env_file
         path: .env
