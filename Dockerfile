@@ -1,36 +1,28 @@
-FROM python:3.13-bookworm AS builder
-
-ENV UV_VERSION="0.8.13"
+FROM docker.io/python:3.13.6-slim-bookworm@sha256:2b09112b54420d2e3e814f2cbe34e8e54d32b8c5abd4e72e89cda4758fc6400a AS production
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
-    build-essential && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    curl \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-ADD https://astral.sh/uv/${UV_VERSION}/install.sh /install.sh
-RUN chmod -R 655 /install.sh && /install.sh && rm /install.sh
-
-ENV PATH="/root/.local/bin:${PATH}"
-
-WORKDIR /app
-
-COPY ./pyproject.toml .
-
-RUN uv sync
-
-FROM python:3.13-slim-bookworm AS production
-
+ENV UV_VERSION="0.8.13"
+ENV PORT="8080"
 ENV SECRET="some other value"
 
-RUN useradd --create-home appuser
-USER appuser
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 WORKDIR /app
+COPY . /app
 
-COPY /app src
-COPY --from=builder /app/.venv .venv
+RUN useradd --create-home appuser
+RUN chown -R appuser:appuser /app
+USER appuser
 
-ENV PATH="/app/.venv/bin:$PATH"
+RUN uv sync --locked --no-cache --no-dev
 
 EXPOSE $PORT
 
-CMD ["uvicorn", "src.main:app", "--log-level", "info", "--host", "0.0.0.0" , "--port", "8080"]
+CMD ["/app/.venv/bin/uvicorn", "app.main:app", "--log-level", "info", "--port", "8080"]
