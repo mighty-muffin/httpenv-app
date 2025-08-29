@@ -21,7 +21,7 @@ RUN useradd --create-home appuser
 RUN chown -R appuser:appuser /app
 USER appuser
 
-RUN uv sync --locked --no-cache --no-dev 
+RUN uv sync --locked --no-cache --no-dev
 
 EXPOSE $PORT
 
