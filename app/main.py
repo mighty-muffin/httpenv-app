@@ -42,8 +42,8 @@ def fetch_external_api():
     backoff = 1
     url = "https://api.github.com/repos/GitGuardian/ggshield"
     headers = {}
-    if github_token:
-        headers["Authorization"] = f"Bearer {github_token}"
+    if GH_TOKEN:
+        headers["Authorization"] = f"Bearer {GH_TOKEN}"
     for attempt in range(max_retries):
         try:
             response = requests.get(url, headers=headers)
