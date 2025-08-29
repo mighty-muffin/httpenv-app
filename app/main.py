@@ -27,4 +27,4 @@ def police_ducode(name: str = "SECRET"):
 
 @app.get("/healthcheck")
 def healthcheck() -> dict[str, str]:
-    return { "status": "OK"}
+    return {"status": "OK"}
