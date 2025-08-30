@@ -7,6 +7,8 @@ A tiny HTTP server built with FastAPI, demonstrating usage of environment variab
 - Simple HTTP API with endpoints:
   - `/` — returns a greeting
   - `/bye` — returns a farewell
+  - `/external` — returns a project external api
+  - `/healthcheck` — returns application healthcheck
   - `/???` — returns a secret (chuuu don't tell anyone)
 
 ## Requirements
