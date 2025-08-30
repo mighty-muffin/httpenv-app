@@ -15,7 +15,9 @@ ENV PYTHONUNBUFFERED=1
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 WORKDIR /app
-COPY . /app
+COPY pyproject.toml uv.lock .
+COPY .github/AGENTS.md .
+COPY app/ /app
 
 RUN useradd --create-home appuser
 RUN chown -R appuser:appuser /app
