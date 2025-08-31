@@ -1,6 +1,10 @@
-zzzz.PHONY: sync
+.PHONY: sync
 sync:
 	uv sync --all-extras --all-packages --group dev
+
+.PHONY: builx
+docker-build:
+	docker buildx build -f Dockerfile . -t httpenv-app
 
 .PHONY: format
 format: 
