@@ -19,6 +19,8 @@ A tiny HTTP server built with FastAPI, demonstrating usage of environment variab
 
 ## Getting Started
 
+There is a `Makefile` for your convenience and usage.
+
 ### 1. Install UV
 
 Follow instructions from the [UV Docs](https://docs.astral.sh/uv/) or use:
@@ -46,7 +48,7 @@ Start the FastAPI server using Uvicorn:
 uv run uvicorn app.main:app --port 8080 # Go to http://localhost:8080
 ```
 
-## Build a container
+### 4. Build a container
 
 To build this container run these commands:
 
