@@ -6,6 +6,7 @@ client = TestClient(app)
 
 STATUS_OK = 200
 
+
 def test_hello():
     response = client.get('/')
     assert response.status_code == STATUS_OK, response.text

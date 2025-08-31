@@ -5,6 +5,7 @@ client = TestClient(app)
 
 STATUS_OK = 200
 
+
 def test_healthcheck_success():
     response = client.get('/healthcheck')
     assert response.status_code == STATUS_OK

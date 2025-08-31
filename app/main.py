@@ -32,7 +32,9 @@ def police_ducode(name: str = 'SECRET'):
 def healthcheck() -> dict[str, str]:
     return {'status': 'OK'}
 
+
 TOO_MANY_REQUESTS = 429
+
 
 @app.get('/external')
 def fetch_external_api() -> dict[str, str]:
@@ -60,3 +62,4 @@ def fetch_external_api() -> dict[str, str]:
             time.sleep(backoff)
             backoff *= 2
             continue
+    return None
