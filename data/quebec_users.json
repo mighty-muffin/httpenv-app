@@ -1,0 +1,92 @@
+[
+  {
+    "language": "French",
+    "name": "Théodore Laplante",
+    "address": "1143 rang Lachapelle Suite 915, Breton -sur-Mer, NT H5N4J5",
+    "email": "fillionveronique@example.com",
+    "phone_number": "965-817-6810",
+    "ssn": "893-63-4066",
+    "dob": "1989-02-01"
+  },
+  {
+    "language": "French",
+    "name": "Emma Jacques",
+    "address": "6711 rang Savoie Apt. 722, L' Lauzon, MB E8J2E1",
+    "email": "fortierolivier@example.org",
+    "phone_number": "766-787-0656",
+    "ssn": "434-13-4306",
+    "dob": "2001-12-17"
+  },
+  {
+    "language": "French",
+    "name": "Gabrielle Desbiens",
+    "address": "71606 rue Célina, Jean Ouest, PE P7T 9G8",
+    "email": "ajean@example.org",
+    "phone_number": "+1-760-812-0847x26567",
+    "ssn": "278-62-9505",
+    "dob": "1953-12-16"
+  },
+  {
+    "language": "English",
+    "name": "Tara Lawrence",
+    "address": "3478 Jennifer Cape, Edwardsfort, PE N7R1E1",
+    "email": "markbrewer@example.com",
+    "phone_number": "1-351-715-0501",
+    "ssn": "832 206 551",
+    "dob": "1974-01-06"
+  },
+  {
+    "language": "English",
+    "name": "Patrick Adams",
+    "address": "529 Clark Estates Apt. 068, Port Chelsey, NT E2L 3K1",
+    "email": "lewiskristen@example.com",
+    "phone_number": "1 (986) 032-0051",
+    "ssn": "771 401 437",
+    "dob": "2002-04-09"
+  },
+  {
+    "language": "English",
+    "name": "Joan Hamilton",
+    "address": "282 Brittany Expressway, North Lisabury, NL S6C8K5",
+    "email": "shawnrich@example.net",
+    "phone_number": "177.413.2867",
+    "ssn": "544 076 250",
+    "dob": "1990-05-06"
+  },
+  {
+    "language": "English",
+    "name": "Charles Collins",
+    "address": "3103 Williams Wall Suite 242, Valerieberg, NS V9A4N3",
+    "email": "erinhughes@example.org",
+    "phone_number": "536-284-1493",
+    "ssn": "508 865 466",
+    "dob": "1941-11-03"
+  },
+  {
+    "language": "English",
+    "name": "Paul Burns",
+    "address": "16078 Kathryn Streets Suite 097, South Josephland, SK J7B 8L3",
+    "email": "lee10@example.org",
+    "phone_number": "(932) 155-0940",
+    "ssn": "546 841 065",
+    "dob": "1945-11-25"
+  },
+  {
+    "language": "French",
+    "name": "Théodore Potvin",
+    "address": "9081 chemin David Apt. 515, Sainte- Jeannine, NS G4R 3M8",
+    "email": "tlapointe@example.com",
+    "phone_number": "(780)745-6453x572",
+    "ssn": "819-57-6196",
+    "dob": "1945-04-06"
+  },
+  {
+    "language": "English",
+    "name": "Peter Blackwell",
+    "address": "084 Daniel Gateway Suite 886, Hollandmouth, NB Y4L1P6",
+    "email": "conniechavez@example.org",
+    "phone_number": "+1 (952) 160-2198",
+    "ssn": "618 816 078",
+    "dob": "1954-10-27"
+  }
+]
