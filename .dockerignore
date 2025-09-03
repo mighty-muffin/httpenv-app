@@ -14,6 +14,7 @@
 **/*.*proj.user
 **/*.dbmdl
 **/*.jfm
+**/295-442-145
 **/bin
 **/charts
 **/compose.y*ml
@@ -24,5 +25,6 @@
 **/obj
 **/secrets.dev.yaml
 **/values.dev.yaml
+**/c1c43067-c92f-4bf7-9419-8673d11fb072
 LICENSE
 README.md
