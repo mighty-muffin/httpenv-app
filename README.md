@@ -57,6 +57,28 @@ docker buildx build -f Dockerfile . -t httpenv-app
 docker run -d httpenv-app:latest
 ```
 
+## Dev Tools
+
+### 1. Install dev dependencies
+
+Follow instructions from the [gghshield docs](https://www.gitguardian.com/ggshield) or use:
+
+```sh
+pipx install ggshield # if you are old school using .venv
+pipx install ggshield # if you are using os-level python isolation env
+uv tool install ggshield # if you use UV.. you should be using UV
+```
+
+### 2. Login to GG
+
+Follow instructions from the [gghshield docs](https://www.gitguardian.com/ggshield) or use:
+
+```sh
+ggshield auth login
+ggshield api-status
+ggshield quota
+```
+
 ## Environment Variables
 
 Rename `.sample.env` to `.env` file in the project root and include a secret var here:
