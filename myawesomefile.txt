@@ -5,3 +5,5 @@ mdpB32="K5UWY3CHNF2EO5LBOJSGSYLOIJSUCYTMMVKG6RDFMNXWIZKUNBUXGUDBONZXO33SMQ======
 mdpB45="C2B VDB19MVEY$EYKEMEDB.D1 C-JCK C:2EZ CV3EK C:8D0QEHEC*QE04EA2"
 mdpMorse=".-- .. .-.. .-.. --. .. - --. ..- .- .-. -.. .. .- -. -... . .- -... .-.. . - --- -.. . -.-. --- -.. . - .... .. ... .--. .- ... ... .-- --- .-. -.."
 mdpsha="e6b6afbd6d76bb5d2041542d7d2e3fac5bb05593"
+mdpmd5="bdc87b9c894da5168059e00ebffb9077"
+password="genericpasswordtest"
