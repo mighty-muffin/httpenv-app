@@ -1,4 +1,4 @@
-FROM docker.io/python:3.13.7-slim-bookworm@sha256:9b8102b7b3a61db24fe58f335b526173e5aeaaf7d13b2fbfb514e20f84f5e386 AS production
+FROM docker.io/python:3.14.0-slim-bookworm@sha256:8a8d3341dfc71b7420256ceff425f64247da7e23fbe3fc23c3ea8cfbad59096d AS production
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     curl \
