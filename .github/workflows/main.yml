@@ -65,6 +65,8 @@ jobs:
     needs:
       - unit-test
     name: Docker Build
+    # Pushes :main, so never run it from another ref (e.g. a manual dispatch on a branch).
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
