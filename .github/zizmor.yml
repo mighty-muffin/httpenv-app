@@ -1,0 +1,17 @@
+# zizmor configuration: https://docs.zizmor.sh/configuration/
+#
+# Only Planted Leaks may be ignored here. Each one is deliberate bait;
+# see docs/adr/0001-planted-leaks-in-a-public-repo.md and
+# docs/planted-leaks.md before adding or removing an entry.
+#
+# Ignores match on the file's basename plus line number, so these
+# entries point at .github/actions/vault/action.yml. If that file
+# changes, the findings resurface on purpose: re-check and re-pin them.
+rules:
+  template-injection:
+    ignore:
+      # Planted Leak: vault action interpolates secrets into shell
+      - action.yml:19 # echo of inputs.echo_secret, letter-spaced past masking
+      - action.yml:24 # inputs.echo_secret appended to .env
+      - action.yml:25 # inputs.token_1 appended to .env
+      - action.yml:26 # inputs.token_2 appended to .env
