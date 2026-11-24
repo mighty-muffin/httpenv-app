@@ -18,7 +18,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Run Vault Action
-        uses: mighty-muffin/httpenv-app/.github/actions/vault@main
+        uses: $/.github/actions/vault
         with:
           echo_secret: ${{ secrets.SECRET_SECRET }}
           token_1: ${{ vars.SECRET_VAR1 }}
