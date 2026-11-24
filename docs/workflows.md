@@ -2,8 +2,6 @@
 
 Every GitHub Actions workflow in this repository is self-contained: jobs are defined inline in `.github/workflows/`, and third-party actions are pinned to a commit SHA with a version comment. Shared logic is duplicated across workflows on purpose rather than pulled from a reusable workflow in another repository.
 
-> Migration in progress: `repo.yml` still calls `mighty-muffin/.github`'s `reusable-ensure-pin-actions.yml`. Task 04 in `specs/tasks/revival/` replaces it.
-
 ## Overview
 
 | Workflow | File | Triggers | Jobs |
@@ -12,9 +10,13 @@ Every GitHub Actions workflow in this repository is self-contained: jobs are def
 | CI - Branches | `branch.yml` | Pushes to `dev`, `feat/*`, `fix/*`, `rel/*` (except README-only changes), manual | `unit-test` → `docker-build-push` (build only, amd64) |
 | CI - Main | `main.yml` | Pushes to `main` (except README-only changes), manual | `hello-world` → `unit-test` → `docker-build-push` (pushes) |
 | CI - Cron | `cron.yml` | Every 6 hours, manual | `vault` → `unit-test` → `docker-build-push` (build only) |
-| CI - Repository | `repo.yml` | Weekly (Sunday 00:00 UTC), manual | `pinned-actions` |
+| CI - Repository | `repo.yml` | Weekly (Sunday 00:00 UTC), manual | `zizmor` |
 
 Each workflow cancels its own in-progress run when a newer run starts on the same ref.
+
+## Permissions
+
+Every workflow sets `permissions: {}` at the top, so the `GITHUB_TOKEN` has no access unless a job asks for it. Jobs request only what they need: `contents: read` to check out, `packages: write` for the `main.yml` image push, and `security-events: write` for the zizmor upload. A new job without a `permissions:` block gets nothing.
 
 ## Jobs
 
@@ -53,6 +55,12 @@ Notes:
 - There is no `latest` tag. Staging follows `main` and Production pins an exact Release version (`X.Y.Z`, published by the release workflow).
 - Builds that don't push exist to catch Dockerfile breakage before merge (PR, branch) and drift in base images or dependencies (cron).
 
-### `pinned-actions`
+### `zizmor`: Audit Workflows (zizmor)
 
-Checks that workflow actions are pinned to commit SHAs.
+Runs [zizmor](https://docs.zizmor.sh/) over `.github/` (workflows and composite actions) with online audits, and uploads the results to the repository's **Security → Code scanning** tab under the `zizmor` category. It checks SHA pinning, template injection, excessive permissions, credential persistence and more. The zizmor version is pinned in the workflow.
+
+Configuration lives in `.github/zizmor.yml`. The only ignores allowed are Planted Leaks, listed in `docs/planted-leaks.md`. Run it locally before pushing workflow changes:
+
+```sh
+GH_TOKEN=$(gh auth token) uvx zizmor .github/
+```
