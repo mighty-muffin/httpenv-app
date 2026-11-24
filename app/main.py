@@ -68,7 +68,12 @@ def police_ducode(
 
 
 @app.get('/healthcheck')
-def healthcheck() -> dict[str, str]:
+def healthcheck(
+    source: Annotated[InfisicalSource, Depends(get_exposed_value_source)],
+) -> dict[str, str]:
+    """Report healthy only while Infisical is answering (see docs/adr/0003)."""
+    if not source.is_healthy():
+        raise HTTPException(status_code=503, detail='Infisical is not answering')
     return {'status': 'OK'}
 
 

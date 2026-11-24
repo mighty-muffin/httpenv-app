@@ -49,6 +49,7 @@ with `Cache-Control: no-store`.
 - `rotated_at` is when the secret was last updated in Infisical.
 - If a refresh fails, the last value is served with `"stale": true`.
 - If no fetch has ever succeeded, the endpoint returns 503.
+- `/healthcheck` returns 503 when no fetch has ever succeeded, or the last success is more than 5 minutes old ([ADR-0003](adr/0003-health-depends-on-infisical.md)). When the 60-second cache has expired it refreshes the value itself, so an idle service still notices an outage.
 - A missing required variable makes the endpoint return 500 and names the missing variables in the server log.
 
 ## Running locally against Staging
