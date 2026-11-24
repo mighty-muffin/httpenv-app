@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Run Hello World Action
-        uses: mighty-muffin/httpenv-app/.github/actions/hello@main
+        uses: $/.github/actions/hello
 
   unit-test:
     needs:

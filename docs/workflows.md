@@ -34,7 +34,7 @@ The job runs the same commands as local development (`make lint`, `make tests`).
 
 ### `hello-world` and `vault`
 
-`main.yml` runs the `hello` composite action and `cron.yml` runs the `vault` composite action from `.github/actions/`. The `vault` action is a Planted Leak: see ADR-0001 (`docs/adr/0001-planted-leaks-in-a-public-repo.md`) before changing it.
+`main.yml` runs the `hello` composite action and `cron.yml` runs the `vault` composite action from `.github/actions/`. Both are referenced with GitHub's self-repository syntax (`uses: $/.github/actions/<name>`), which resolves the action from this repository at the exact commit being run, with no checkout step. Use `$/` rather than `./` (needs a checkout) or `mighty-muffin/httpenv-app/...@main` (runs whatever is on `main`, not the commit under test). The `vault` action is a Planted Leak: see ADR-0001 (`docs/adr/0001-planted-leaks-in-a-public-repo.md`) before changing it.
 
 ### `docker-build-push`: Docker Build
 
