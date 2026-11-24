@@ -14,6 +14,8 @@ SECRET_NAME = 'EXPOSED_VALUE'
 DEFAULT_HOST = 'https://app.infisical.com'
 # Log in again this many seconds before the access token expires.
 TOKEN_RENEWAL_MARGIN = 60.0
+# Report unhealthy once the last successful fetch is older than this (docs/adr/0003).
+STALE_LIMIT = 300.0
 
 logger = logging.getLogger(__name__)
 
@@ -117,3 +119,11 @@ class InfisicalSource:
             last_success_at=now,
         )
         return self._last
+
+    def is_healthy(self) -> bool:
+        """Refresh if the cache has expired, then report whether Infisical answers."""
+        try:
+            reading = self.fetch()
+        except NeverFetchedError:
+            return False
+        return self._clock() - reading.last_success_at <= STALE_LIMIT

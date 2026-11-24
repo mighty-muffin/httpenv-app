@@ -1,10 +1,5 @@
-from collections.abc import Iterator
-
-import pytest
-from app.main import app, get_exposed_value_source
+from app.main import app
 from fastapi.testclient import TestClient
-
-from tests.fakes import FakeClock, FakeInfisical, make_source
 
 # Setup the TestClient
 client = TestClient(app)
@@ -39,24 +34,6 @@ def test_bye_name():
     assert response.status_code == STATUS_OK, response.text
     data = response.json()
     assert data == 'Goodbye, Test!'
-
-
-@pytest.fixture
-def clock() -> FakeClock:
-    return FakeClock()
-
-
-@pytest.fixture
-def infisical(
-    monkeypatch: pytest.MonkeyPatch, clock: FakeClock
-) -> Iterator[FakeInfisical]:
-    monkeypatch.setenv('APP_ENVIRONMENT', 'staging')
-    monkeypatch.setenv('APP_VERSION', '1.2.3')
-    fake = FakeInfisical(value='first')
-    source = make_source(fake, clock)
-    app.dependency_overrides[get_exposed_value_source] = lambda: source
-    yield fake
-    app.dependency_overrides.clear()
 
 
 def test_policeducode_serves_the_exposed_value_without_caching(infisical):
