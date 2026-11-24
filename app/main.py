@@ -1,13 +1,18 @@
 import os
 import time
+import tomllib
+from functools import cache
+from pathlib import Path
+from typing import Annotated
 
 import requests
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Response
+
+from app.exposed_value import InfisicalSource, NeverFetchedError
 
 load_dotenv()
 
-SECRET = os.getenv('SECRET', '123456')
 GH_TOKEN = os.getenv('GITHUB_TOKEN', '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')
 
 app = FastAPI()
@@ -23,9 +28,43 @@ def bye(name: str = 'World'):
     return f'Goodbye, {name}!'
 
 
+@cache
+def get_exposed_value_source() -> InfisicalSource:
+    """Return the one reader shared by every request, so its cache is shared."""
+    return InfisicalSource.from_env()
+
+
+def running_version() -> str:
+    """Return APP_VERSION when the image sets it, else the version in pyproject.toml."""
+    if version := os.environ.get('APP_VERSION'):
+        return version
+    pyproject = Path(__file__).resolve().parent.parent / 'pyproject.toml'
+    with pyproject.open('rb') as f:
+        return tomllib.load(f)['project']['version']
+
+
 @app.get('/policeducode')
-def police_ducode(name: str = 'SECRET'):
-    return f'The secret is... {SECRET}!'
+def police_ducode(
+    response: Response,
+    source: Annotated[InfisicalSource, Depends(get_exposed_value_source)],
+) -> dict[str, object]:
+    """Serve the Exposed Value (a Planted Leak path, see docs/adr/0001)."""
+    try:
+        reading = source.fetch()
+    except NeverFetchedError as exc:
+        raise HTTPException(
+            status_code=503,
+            detail='The Exposed Value is not available yet',
+            headers={'Cache-Control': 'no-store'},
+        ) from exc
+    response.headers['Cache-Control'] = 'no-store'
+    return {
+        'value': reading.value,
+        'environment': os.environ.get('APP_ENVIRONMENT', 'local'),
+        'rotated_at': reading.rotated_at,
+        'version': running_version(),
+        'stale': reading.stale,
+    }
 
 
 @app.get('/healthcheck')
